@@ -172,6 +172,7 @@
     <Content Include="packages.config" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Account\Confirm.cshtml" />
+    <Content Include="Views\Home\example.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
