@@ -11,6 +11,7 @@ using Rejime.Models;
 using System.Net;
 using System.Net.Mail;
 using System.Web.Hosting;
+using System.ComponentModel;
 
 namespace Rejime.Models
 {
@@ -43,6 +44,7 @@ namespace Rejime.Models
         public string Date { get; set; }
         [StringLength(10)]
         public string Expire { get; set; }
+        [DefaultValue("false")]
         public bool Active { get; set; }
         public string CodeConfirm { get; set; }
         public virtual Gender genderTable { get; set; }
@@ -67,6 +69,8 @@ namespace Rejime.Models
             try
             {
                 client.Send(message);
+                this.CodeConfirm = token;
+                this.Create(this);
                 return "لینک فعال سازی به ایمیل شما ارسال شده است، لطفا ایمیل خود را بررسی نمایید";
             }
             catch (Exception ex)
@@ -88,20 +92,20 @@ namespace Rejime.Models
         {
             return entity.User.Find(id);
         }
-        //public string Create(User obj)
-        //{
-        //    entity.User.Add(obj);
+        public string Create(User obj)
+        {
+            entity.User.Add(obj);
 
-        //    try
-        //    {
-        //        entity.SaveChanges();
-        //        return "اطلاعات با موفقیت ذخیره شد";
-        //    }
-        //    catch (Exception ex)
-        //    { 
-        //        return "در ذخیره سازی اطلاعات مشکلی رخ داده است";
-        //    }
-        //}
+            try
+            {
+                entity.SaveChanges();
+                return "اطلاعات با موفقیت ذخیره شد";
+            }
+            catch (Exception ex)
+            {
+                return "در ذخیره سازی اطلاعات مشکلی رخ داده است";
+            }
+        }
         //public string Update(User obj)
         //{
         //    entity.User.Attach(obj);
