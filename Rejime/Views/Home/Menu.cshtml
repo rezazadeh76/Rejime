@@ -1,0 +1,172 @@
+﻿
+@{
+    Layout = null;
+
+}
+
+@model List<Rejime.Models.Menu>
+<nav class=" navbar navbar-expand-md navbar-light  bg-light fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-header order-md-last">
+        <a class="navbar-brand " href="#"> <span class="text-success">سلامت </span><span class="text-danger">یار </span></a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item  ">
+                <button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">ورود&nbsp;<span class="fa fa-sign-in"></span></button>
+            </li>
+
+            <li class="nav-item">
+                <span style="color: #00a99d;" class="btn bg-transparent" data-toggle="collapse" data-target="#searching"><i class="fa fa-search"></i></span>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav   flex-row-reverse ml-auto">
+            @foreach (var Baseitem in Model)
+            {
+                if (Baseitem.Parent_id == 0)
+                {
+                    var Submenu = Model.Where(sub => sub.Parent_id == Baseitem.id).ToList();
+                    if (Submenu != null && Submenu.Count > 0)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link " href="#" data-toggle="dropdown">
+                                <span class="@Baseitem.Icon" style="font-size:13px"></span> @Baseitem.Name
+                            </a>
+                            <ul class="dropdown-menu bg-light text-right">
+                                @foreach (var Subitem in Submenu)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Subitem.Link"> @Subitem.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Baseitem.Link"><span class="@Baseitem.Icon"></span>@Baseitem.Name</a>
+                        </li>
+                    }
+                }
+
+            }
+
+        </ul>
+
+    </div>
+</nav>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="form">
+        <span onclick="document.getElementsByClassName('modal-backdrop')[0].classList.remove('show'); document.getElementById('exampleModal'). style.display='none'" class="text-right text-white">&times;</span>
+       
+        <ul class="tab-group">
+            <li class="tab "><a href="#signup">ثبت نام</a></li>
+            <li class="tab active"><a href="#login">ورود  </a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="login">
+                <h1>ورود به حساب کاربری</h1>
+
+                <form action="/" method="post">
+                    <div class="field-wrap">
+                        <label>
+                            نام کاربری<span class="req">*</span>
+                        </label>
+                        <input type="email" required autocomplete="off" />
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            کلمه عبور<span class="req">*</span>
+                        </label>
+                        <input type="password" required autocomplete="off" />
+                    </div>
+
+                    <p class="forgot"><a href="#">پسوردم را فراموش کردم</a></p>
+
+                    <button class="button button-block"> ورود</button>
+
+                </form>
+
+            </div>
+            <div id="signup">
+                <h1>ثبت نام</h1>
+
+                <form action="/Account/SendAuthenticationLink" method="post">
+
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                نام<span class="req">*</span>
+                            </label>
+                            <input type="text" required autocomplete="off" name="txtName" />
+                        </div>
+
+                        <div class="field-wrap">
+                            <label>
+                                نام خانوادگی<span class="req">*</span>
+                            </label>
+                            <input type="text" required autocomplete="off" name="txtFamily" />
+                        </div>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            ایمیل<span class="req">*</span>
+                        </label>
+                        <input type="email" required autocomplete="off" name="txtMail" />
+                    </div>
+
+                    @*<div class="field-wrap">
+                        <label>
+                            پسورد<span class="req">*</span>
+                        </label>
+                        <input type="password" required autocomplete="off" />
+                    </div>*@
+
+                    <button type="submit" class="button button-block">تایید</button>
+
+                </form>
+
+            </div>
+
+
+
+        </div>
+        <!-- tab-content -->
+
+    </div> <!-- /form -->
+    @*<div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </div>*@
+</div>
+
