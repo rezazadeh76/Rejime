@@ -17,9 +17,8 @@ namespace Rejime.Models
 {
     public class User:DALS
     {
+        #region khodadadi
         EF db = new EF();
-
-
         public int id { get; set; }
         [StringLength(100)]
         public string FirstName { get; set; }
@@ -46,6 +45,7 @@ namespace Rejime.Models
         public string Expire { get; set; }
         [DefaultValue("false")]
         public bool Active { get; set; }
+        [StringLength(32)]
         public string CodeConfirm { get; set; }
         public virtual Gender genderTable { get; set; }
 
@@ -70,6 +70,7 @@ namespace Rejime.Models
             {
                 client.Send(message);
                 this.CodeConfirm = token;
+                this.ID_gender = 2;
                 this.Create(this);
                 return "لینک فعال سازی به ایمیل شما ارسال شده است، لطفا ایمیل خود را بررسی نمایید";
             }
@@ -162,6 +163,7 @@ namespace Rejime.Models
         //        return "";
         //    }
         //}
+        #endregion
     }
 
 

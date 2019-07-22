@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+#region khodadadi
 using Rejime.Models;
 
 //for new token for link comfirm email
 using System.Security.Cryptography;
 using System.Text;
+#endregion
+
 namespace Rejime.Models
 {
     public  class DALS
     {
+        #region khodadadi
         public EF Entity = new EF();
         public static Menu ObjMenu = new Menu();
         public static User ObjUser = new User();
@@ -36,5 +40,6 @@ namespace Rejime.Models
                 }
             }
         }
+        #endregion
     }
 }

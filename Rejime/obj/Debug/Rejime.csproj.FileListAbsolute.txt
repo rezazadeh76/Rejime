@@ -33,4 +33,3 @@ C:\Users\Sogand\Videos\pic\Rejime\Rejime\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Users\Sogand\Videos\pic\Rejime\Rejime\bin\Newtonsoft.Json.xml
 C:\Users\Sogand\Videos\pic\Rejime\Rejime\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\Users\Sogand\Videos\pic\Rejime\Rejime\bin\Twilio.xml
-C:\Users\Sogand\Videos\pic\Rejime\Rejime\obj\Debug\Rejime.csprojAssemblyReference.cache

@@ -8,6 +8,7 @@ namespace Rejime.Models
     using System.Linq;
     public partial class Menu:DALS
     {
+        #region khodadadi
         public int id { get; set; }
 
         [StringLength(50)]
@@ -30,6 +31,7 @@ namespace Rejime.Models
         {
             return Entity.Menu.OrderBy(obj => obj.Mnuid).ToList();
         }
+        #endregion
         #endregion
     }
 }

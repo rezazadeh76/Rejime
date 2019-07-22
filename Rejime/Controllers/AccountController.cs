@@ -11,6 +11,7 @@ namespace Rejime.Controllers
 {
     public class AccountController : Controller
     {
+        #region khodadadi
         //Send Authentication Linke 
         public ActionResult SendAuthenticationLink(FormCollection obj)
         {
@@ -18,8 +19,8 @@ namespace Rejime.Controllers
             DALS.ObjUser.LastName = obj["txtFamily"];
             DALS.ObjUser.Email = obj["txtMail"];
             ViewBag.message = DALS.ObjUser.SendAuthenticationLink();
-          return  Redirect("~/Home/Index");
-          //  return View("Menu",DALS.ObjMenu.Select());
+            return Redirect("~/Home/Index");
+            //  return View("Menu",DALS.ObjMenu.Select());
         }
         public ActionResult Confirm(string reg)
         {
@@ -27,5 +28,7 @@ namespace Rejime.Controllers
 
             return View();
         }
+        #endregion
+
     }
 }

@@ -11,7 +11,8 @@ namespace Rejime.Controllers
 {
     public class HomeController : Controller
     {
-        //
+
+        #region khodadadi
         // GET: /Home/
         public ActionResult Index()
         {
@@ -30,6 +31,8 @@ namespace Rejime.Controllers
                 return Content("Error");
             }
         }
-     
+        #endregion
+
+
     }
 }

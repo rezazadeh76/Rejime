@@ -12,9 +12,11 @@ namespace Rejime.Models
         {
         }
 
+        #region khodadadi
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
+        #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
