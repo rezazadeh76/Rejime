@@ -1,0 +1,123 @@
+﻿@model Rejime.Models.User
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="form">
+        <span onclick="document.getElementsByClassName('modal-backdrop')[0].classList.remove('show'); document.getElementById('exampleModal'). style.display='none'" class="text-right text-white">&times;</span>
+
+        <ul class="tab-group">
+            <li class="tab "><a href="#signup">ثبت نام</a></li>
+            <li class="tab active"><a href="#login">ورود  </a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="login">
+                <h1>ورود به حساب کاربری</h1>
+
+                <form action="/" method="post">
+                    <div class="field-wrap">
+                        <label>
+                            نام کاربری<span class="req">*</span>
+                        </label>
+                        <input type="email" required autocomplete="off" />
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            کلمه عبور<span class="req">*</span>
+                        </label>
+                        <input type="password" required autocomplete="off" />
+                    </div>
+
+                    <p class="forgot"><a href="#">پسوردم را فراموش کردم</a></p>
+
+                    <button class="button button-block"> ورود</button>
+
+                </form>
+
+            </div>
+            @using (Html.BeginForm("SendAuthenticationLink", "Account"))
+            {
+                @Html.AntiForgeryToken();
+                <div id="signup">
+                    <h1>ثبت نام</h1>
+
+                    <form action="/Account/SendAuthenticationLink" method="post">
+
+                        <div class="top-row">
+                            <div class="field-wrap">
+                                @*<label>
+                                    نام<span class="req">*</span>
+                                </label>
+                                <input type="text" required autocomplete="off" name="txtName" />*@
+                                @Html.LabelFor(Model => Model.FirstName)
+                                @Html.TextBoxFor(model => model.FirstName,new { @name="txtName"})
+                                @Html.ValidationMessageFor(model => model.FirstName)
+                            </div>
+
+                            <div class="field-wrap">
+                                @*<label>
+                                    نام خانوادگی<span class="req">*</span>
+                                </label>
+                                <input type="text" required autocomplete="off" name="txtFamily" />*@
+                                @Html.LabelFor(Model => Model.LastName)
+                                @Html.TextBoxFor(model => model.LastName,new { @name="txtFamily"})
+                                @Html.ValidationMessageFor(model => model.LastName)
+                            </div>
+                        </div>
+
+                        <div class="field-wrap">
+                            @*<label>
+                                ایمیل<span class="req">*</span>
+                            </label>
+                            <input type="email" required autocomplete="off" name="txtMail" />*@
+                                @Html.LabelFor(Model => Model.Email)
+                                @Html.TextBoxFor(model => model.Email,new { @name="txtMail"})
+                                @Html.ValidationMessageFor(model => model.Email)                  
+                        </div>
+
+                        @*<div class="field-wrap">
+                        <label>
+                            پسورد<span class="req">*</span>
+                        </label>
+                        <input type="password" required autocomplete="off" />
+                    </div>*@
+
+                        <button type="submit" class="button button-block">تایید</button>
+
+                    </form>
+
+                </div>
+
+            }
+
+        </div>
+        <!-- tab-content -->
+
+    </div> <!-- /form -->
+
+    @*<div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </div>*@
+</div>

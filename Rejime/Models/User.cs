@@ -20,18 +20,32 @@ namespace Rejime.Models
         #region khodadadi
         EF db = new EF();
         public int id { get; set; }
-        [StringLength(100)]
+        //[RegularExpression(@"^[A-Z]+[a-zA-Z'\s]*$")]
+        [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
+        [Required(ErrorMessage = "لطفا نام را وارد نمایید")]
+        [Display(Name = "نام")]
         public string FirstName { get; set; }
-        [StringLength(100)]
+
+
+        [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
+        [Required(ErrorMessage = "لطفا نام را وارد نمایید")]
+        [Display(Name = "نام خانوادگی")]
         public string LastName { get; set; }
+
+
         [StringLength(100)]
         public string UserName { get; set; }
         [StringLength(100)]
         public string Passwords { get; set; }
         [ForeignKey("genderTable")]
         public int ID_gender { get; set; }
-        [StringLength(100)]
+
+        [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
+        //[Required(ErrorMessage = "لطفا ایمیل را وارد نمایید")]
+        [Display(Name = "ایمیل ")]
+        [RegularExpression(@".+@.+", ErrorMessage = "فرمت ایمیل نادرست است")]
         public string Email { get; set; }
+
         [StringLength(11)]
         public string Moblie { get; set; }
         [StringLength(50)]
