@@ -1,4 +1,5 @@
 ﻿@model Rejime.Models.User
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="form">
         <span onclick="document.getElementsByClassName('modal-backdrop')[0].classList.remove('show'); document.getElementById('exampleModal'). style.display='none'" class="text-right text-white">&times;</span>
@@ -40,17 +41,17 @@
                 <div id="signup">
                     <h1>ثبت نام</h1>
 
-                    <form action="/Account/SendAuthenticationLink" method="post">
+                    <form action="/Account/SendAuthenticationLink" method="post" id="Register">
 
                         <div class="top-row">
                             <div class="field-wrap">
-                                @*<label>
+                                <label>
                                     نام<span class="req">*</span>
                                 </label>
-                                <input type="text" required autocomplete="off" name="txtName" />*@
-                                @Html.LabelFor(Model => Model.FirstName)
+                                <input type="text" required autocomplete="off" name="txtName" maxlength="100" data-bv-notempty-message="فیلد نام الزامی است" />
+                                @*@Html.LabelFor(Model => Model.FirstName)
                                 @Html.TextBoxFor(model => model.FirstName,new { @name="txtName"})
-                                @Html.ValidationMessageFor(model => model.FirstName)
+                                @Html.ValidationMessageFor(model => model.FirstName)*@
                             </div>
 
                             <div class="field-wrap">
@@ -59,7 +60,7 @@
                                 </label>
                                 <input type="text" required autocomplete="off" name="txtFamily" />*@
                                 @Html.LabelFor(Model => Model.LastName)
-                                @Html.TextBoxFor(model => model.LastName,new { @name="txtFamily"})
+                                @Html.TextBoxFor(model => model.LastName,new { @name="txtFamily",})
                                 @Html.ValidationMessageFor(model => model.LastName)
                             </div>
                         </div>

@@ -129,6 +129,8 @@
     <Content Include="Content\scss\Login.scss" />
     <Content Include="fonts\iran Sans.ttf" />
     <Content Include="fonts\IRANSansWeb%28FaNum%29.ttf" />
+    <Content Include="Scripts\bootstrap-validate.js" />
+    <Content Include="Scripts\Operation.js" />
     <Content Include="Views\Account\EmailTemplate\Text.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\headerimage.jpg" />
