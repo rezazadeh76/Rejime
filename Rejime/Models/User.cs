@@ -28,7 +28,7 @@ namespace Rejime.Models
 
 
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
-        [Required(ErrorMessage = "لطفا نام را وارد نمایید")]
+        [Required(ErrorMessage = "لطفا نام خانوادگی را وارد نمایید")]
         [Display(Name = "نام خانوادگی")]
         public string LastName { get; set; }
 
