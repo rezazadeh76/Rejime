@@ -41,7 +41,7 @@ namespace Rejime.Models
         public int ID_gender { get; set; }
 
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
-        //[Required(ErrorMessage = "لطفا ایمیل را وارد نمایید")]
+        [Required(ErrorMessage = "لطفا ایمیل را وارد نمایید")]
         [Display(Name = "ایمیل ")]
         [RegularExpression(@".+@.+", ErrorMessage = "فرمت ایمیل نادرست است")]
         public string Email { get; set; }
