@@ -13,12 +13,12 @@ namespace Rejime.Controllers
     {
         #region khodadadi
         //Send Authentication Linke 
-        public ActionResult SendAuthenticationLink(FormCollection obj)
+        public ActionResult SendAuthenticationLink(User obj)
         {
-            DALS.ObjUser.FirstName = obj["txtName"];
-            DALS.ObjUser.LastName = obj["txtFamily"];
-            DALS.ObjUser.Email = obj["txtMail"];
-            ViewBag.message = DALS.ObjUser.SendAuthenticationLink();
+            //DALS.ObjUser.FirstName = obj["txtName"];
+            //DALS.ObjUser.LastName = obj["txtFamily"];
+            //DALS.ObjUser.Email = obj["txtMail"];
+            ViewBag.message =obj.SendAuthenticationLink();
             return Redirect("~/Home/Index");
             //  return View("Menu",DALS.ObjMenu.Select());
         }

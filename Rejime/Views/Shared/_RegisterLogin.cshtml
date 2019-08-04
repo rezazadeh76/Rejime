@@ -1,5 +1,5 @@
 ﻿@model Rejime.Models.User
-
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="form">
         <span onclick="document.getElementsByClassName('modal-backdrop')[0].classList.remove('show'); document.getElementById('exampleModal'). style.display='none'" class="text-right text-white">&times;</span>
@@ -35,66 +35,57 @@
                 </form>
 
             </div>
-            @using (Html.BeginForm("SendAuthenticationLink", "Account"))
-            {
-                @Html.AntiForgeryToken();
-                <div id="signup">
-                    <h1>ثبت نام</h1>
+            @*@using (Html.BeginForm("SendAuthenticationLink", "Account", FormMethod.Post, new { autocomplete="off"}))
+                {*@
+            @Html.AntiForgeryToken();
+            <div id="signup">
+                <h1>ثبت نام</h1>
 
-                    <form action="/Account/SendAuthenticationLink" method="post" id="Register">
-
-                        <div class="top-row">
-                            <div class="field-wrap">
-                                <label>
-                                    نام<span class="req">*</span>
-                                </label>
-                                <input type="text" required autocomplete="off" name="txtName" maxlength="100" data-bv-notempty-message="فیلد نام الزامی است" />
-                                @*@Html.LabelFor(Model => Model.FirstName)
-                                @Html.TextBoxFor(model => model.FirstName,new { @name="txtName"})
-                                @Html.ValidationMessageFor(model => model.FirstName)*@
-                            </div>
-
-                            <div class="field-wrap">
-                                @*<label>
-                                    نام خانوادگی<span class="req">*</span>
-                                </label>
-                                <input type="text" required autocomplete="off" name="txtFamily" />*@
-                                @Html.LabelFor(Model => Model.LastName)
-                                @Html.TextBoxFor(model => model.LastName,new { @name="txtFamily",})
-                                @Html.ValidationMessageFor(model => model.LastName)
-                            </div>
+                <form autocomplete="off">
+                    @* action="/Account/SendAuthenticationLink" method="post" id="Register" *@
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            @* <label>
+                                نام<span class="req">*</span>
+                                  </label>
+                                <input type="text" required autocomplete="off" name="txtName" maxlength="100" data-bv-notempty-message="فیلد نام الزامی است" />*@
+                            @Html.LabelFor(Model => Model.FirstName, "نام*")
+                            @Html.TextBoxFor(model => model.FirstName, new { @name = "txtName" })
+                            @Html.ValidationMessageFor(model => model.FirstName)
                         </div>
 
                         <div class="field-wrap">
                             @*<label>
+                                    نام خانوادگی<span class="req">*</span>
+                                </label>
+                                <input type="text" required autocomplete="off" name="txtFamily" />*@
+                            @Html.LabelFor(Model => Model.LastName, "نام خانوادگی*")
+                            @Html.TextBoxFor(model => model.LastName, new { @name = "txtFamily", })
+                            @Html.ValidationMessageFor(model => model.LastName)
+                        </div>
+                    </div>
+
+                    <div class="field-wrap">
+                        @*<label>
                                 ایمیل<span class="req">*</span>
                             </label>
                             <input type="email" required autocomplete="off" name="txtMail" />*@
-                                @Html.LabelFor(Model => Model.Email)
-                                @Html.TextBoxFor(model => model.Email,new { @name="txtMail"})
-                                @Html.ValidationMessageFor(model => model.Email)                  
-                        </div>
+                        @Html.LabelFor(Model => Model.Email, "ایمیل*")
+                        @Html.TextBoxFor(model => model.Email, new { @name = "txtMail" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    <button class="button button-block" onClick="Operation.processData(this.form,1,'/Account/SendAuthenticationLink')">تایید</button>
 
-                        @*<div class="field-wrap">
-                        <label>
-                            پسورد<span class="req">*</span>
-                        </label>
-                        <input type="password" required autocomplete="off" />
-                    </div>*@
+                </form>
 
-                        <button type="submit" class="button button-block">تایید</button>
+            </div>
 
-                    </form>
-
-                </div>
-
-            }
+            @*}*@
 
         </div>
         <!-- tab-content -->
 
     </div> <!-- /form -->
-
     @*<div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
