@@ -15,15 +15,12 @@ namespace Rejime.Controllers
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //Send Authentication Linke 
-        public ActionResult SendAuthenticationLink(User obj)
+        public ContentResult SendAuthenticationLink(User obj)
         {
             if (ModelState.IsValid)
-            {
-               ViewBag.message = obj.SendAuthenticationLink();
+               return Content(obj.SendAuthenticationLink());
 
-            }
-            return Redirect("~/Home/Index");
-            //  return View("Menu",DALS.ObjMenu.Select());
+            return Content("");
         }
         public ActionResult Confirm(string reg)
         {

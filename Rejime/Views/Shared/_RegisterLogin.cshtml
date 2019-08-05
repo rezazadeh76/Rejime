@@ -1,77 +1,91 @@
 ﻿@model Rejime.Models.User
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="form">
-        <span onclick="document.getElementsByClassName('modal-backdrop')[0].classList.remove('show'); document.getElementById('exampleModal'). style.display='none'" class="text-right text-white">&times;</span>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
 
-        <ul class="tab-group">
-            <li class="tab "><a href="#signup">ثبت نام</a></li>
-            <li class="tab active"><a href="#login">ورود  </a></li>
-        </ul>
-
-        <div class="tab-content">
-            <div id="login">
-                <h1>ورود به حساب کاربری</h1>
-
-                <form action="/" method="post">
-                    <div class="field-wrap">
-                        <label>
-                            نام کاربری<span class="req">*</span>
-                        </label>
-                        <input type="email" required autocomplete="off" />
+                <div class="form">
+                    <div class="row">
+                        <button type="button" class="close" data-dismiss="modal" style="margin-left: 95%; ">&times;</button>
                     </div>
+                    <ul class="tab-group">
+                        <li class="tab "><a href="#signup">ثبت نام</a></li>
+                        <li class="tab active"><a href="#login">ورود  </a></li>
+                    </ul>
 
-                    <div class="field-wrap">
-                        <label>
-                            کلمه عبور<span class="req">*</span>
-                        </label>
-                        <input type="password" required autocomplete="off" />
-                    </div>
+                    <div class="tab-content">
+                        <div id="login">
+                            <h1>ورود به حساب کاربری</h1>
 
-                    <p class="forgot"><a href="#">پسوردم را فراموش کردم</a></p>
+                            <form action="/" method="post">
+                                <div class="field-wrap">
+                                    <label>
+                                        نام کاربری<span class="req">*</span>
+                                    </label>
+                                    <input type="email" required autocomplete="off" />
+                                </div>
 
-                    <button class="button button-block"> ورود</button>
+                                <div class="field-wrap">
+                                    <label>
+                                        کلمه عبور<span class="req">*</span>
+                                    </label>
+                                    <input type="password" required autocomplete="off" />
+                                </div>
 
-                </form>
+                                <p class="forgot"><a href="#">پسوردم را فراموش کردم</a></p>
 
-            </div>
-            @*@using (Html.BeginForm("SendAuthenticationLink", "Account", FormMethod.Post, new { autocomplete="off"}))
-                {*@
-            @Html.AntiForgeryToken()
-            <div id="signup">
-                <h1 >ثبت نام</h1>
+                                <button class="button button-block"> ورود</button>
 
-                <form autocomplete="off">
-                    <div class="top-row">
-                        <div class="field-wrap">
-                            @Html.LabelFor(Model => Model.FirstName, "نام*")
-                            @Html.TextBoxFor(model => model.FirstName)
-                            @Html.ValidationMessageFor(model => model.FirstName,"",new { @class="Validate"})
+                            </form>
+
+                        </div>
+                        @*@using (Html.BeginForm("SendAuthenticationLink", "Account", FormMethod.Post, new { autocomplete="off"}))
+            {*@
+                        @Html.AntiForgeryToken()
+                        <div id="signup">
+                            <h1>ثبت نام</h1>
+
+                            <form autocomplete="off" id="Register">
+                                <div class="top-row">
+                                    <div class="field-wrap">
+                                        @Html.LabelFor(Model => Model.FirstName, "نام*")
+                                        @Html.TextBoxFor(model => model.FirstName)
+                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "Validate" })
+                                    </div>
+
+                                    <div class="field-wrap">
+                                        @Html.LabelFor(Model => Model.LastName, "نام خانوادگی*")
+                                        @Html.TextBoxFor(model => model.LastName)
+                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "Validate" })
+                                    </div>
+                                </div>
+
+                                <div class="field-wrap">
+                                    @Html.LabelFor(Model => Model.Email, "ایمیل*")
+                                    @Html.TextBoxFor(model => model.Email)
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "Validate" })
+                                </div>
+                                <button class="button button-block" onClick="Operation.SendData('Register','/Account/SendAuthenticationLink')">تایید</button>
+                            </form>
+
                         </div>
 
-                        <div class="field-wrap">
-                            @Html.LabelFor(Model => Model.LastName, "نام خانوادگی*")
-                            @Html.TextBoxFor(model => model.LastName)
-                            @Html.ValidationMessageFor(model => model.LastName,"",new {@class="Validate"})
-                        </div>
-                    </div>
+                        @*}*@
 
-                    <div class="field-wrap">
-                        @Html.LabelFor(Model => Model.Email, "ایمیل*")
-                        @Html.TextBoxFor(model => model.Email)
-                        @Html.ValidationMessageFor(model => model.Email,"",new {@class="Validate"})
                     </div>
-                   <button class="button button-block" onClick="Operation.SendData(this.form,'/Account/SendAuthenticationLink')">تایید</button>
-                </form>
+                    <!-- tab-content -->
 
+                </div>
             </div>
 
-            @*}*@
 
         </div>
-        <!-- tab-content -->
+    </div>
 
-    </div> <!-- /form -->
+   <!-- /form -->
     @*<div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -99,3 +113,8 @@
             </div>
         </div>*@
 </div>
+        <script>
+            $('#cclose').click(function () {
+                window.parent.jQuery('#exampleModal').dialog('close');
+            });
+        </script>
