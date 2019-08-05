@@ -1,4 +1,10 @@
-﻿*, *:before, *:after {
+﻿/* Define user khodadadi*/
+.Validate {
+    color: red;
+}
+/* Define user khodadadi*/
+
+*, *:before, *:after {
     box-sizing: border-box;
 }
 
@@ -150,9 +156,9 @@ textare
 }
 
 .top-row > div {
-    float: left;
+    float: right;
     width: 48%;
-    margin-right: 4%;
+    margin-left: 4%;
 }
 
     .top-row > div:last-child {

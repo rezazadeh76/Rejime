@@ -45,11 +45,12 @@ time, mark, audio, video {
     font-size:100%;
     vertical-align:baseline;
     background:transparent;
+    text-align:right
 }
 
-body {
-    line-height:1;
-}
+    body {
+        line-height: 1;
+    }
 
 article,aside,details,figcaption,figure,
 footer,header,hgroup,menu,nav,section { 

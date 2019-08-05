@@ -5,18 +5,22 @@ if (window.Operation == undefined) {
         init: function () {
         },
     
-        SendData: function (form,AddressUrl) {
+        SendData: function (form, AddressUrl) {
             for (var i = 0; i < form.elements.length; i++) {
                 if (form.elements[i].nodeName === "INPUT") {
-                    Operation.data[form.elements[i].name] = form.elements[i].value 
+                    Operation.data[form.elements[i].name] = form.elements[i].value
                 }
             }
             $.ajax({
+               // method:"post",
+                type:"POST",
                 url: AddressUrl,
                 data: Operation.data,
                 success: function () {
+                    alert(45)
                 },
             });
+        },
 
             //$.post(ChangePassword.URL + "?ACT=AddPassword", data, function (data) {
             //    if (data.error == false) {
@@ -64,8 +68,6 @@ if (window.Operation == undefined) {
             //}, 'json');
 
 
-        },
-     
     }
 
 }

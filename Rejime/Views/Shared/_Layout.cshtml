@@ -21,11 +21,12 @@
     <link href="~/Content/reset.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/owl.carousel.min.css" rel="stylesheet" />
 
     <!-- file login-->
     <link href="~/Content/Login.css" rel="stylesheet" />
 
+    <!-- message box-->
+    <link href="~/Content/query-confirm.min.css" rel="stylesheet" />
 
 </head>
 
@@ -35,11 +36,10 @@
         <!--  Menu   -->
         @Html.Action("LoadMenu", "Home")
     </header>
-    @RenderBody();
+    @RenderBody()
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/owl.carousel.min.js"></script>
 
     <!-- file Login-->
     <script src="~/Scripts/Login.js"></script>
@@ -48,8 +48,10 @@
     <script src="~/Scripts/Operation.js"></script>
 
     <!-- validation -->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <!-- message box-->
+    <script src="~/Scripts/jquery-confirm.js"></script>
 </body>
 </html>

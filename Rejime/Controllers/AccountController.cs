@@ -12,13 +12,16 @@ namespace Rejime.Controllers
     public class AccountController : Controller
     {
         #region khodadadi
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         //Send Authentication Linke 
         public ActionResult SendAuthenticationLink(User obj)
         {
-            //DALS.ObjUser.FirstName = obj["txtName"];
-            //DALS.ObjUser.LastName = obj["txtFamily"];
-            //DALS.ObjUser.Email = obj["txtMail"];
-            ViewBag.message =obj.SendAuthenticationLink();
+            if (ModelState.IsValid)
+            {
+               ViewBag.message = obj.SendAuthenticationLink();
+
+            }
             return Redirect("~/Home/Index");
             //  return View("Menu",DALS.ObjMenu.Select());
         }

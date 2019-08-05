@@ -37,6 +37,7 @@ namespace Rejime.Models
         public string UserName { get; set; }
         [StringLength(100)]
         public string Passwords { get; set; }
+
         [ForeignKey("genderTable")]
         public int ID_gender { get; set; }
 
