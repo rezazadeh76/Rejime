@@ -5,16 +5,16 @@ if (window.Operation == undefined) {
         init: function () {
         },
     
-        processData: function (form,num,AddressUrl) {
-            for (var i = 0; i < form.elements.length - num; i++) {
-                Operation.data[form.elements[i].name]=form.elements[i].value 
+        SendData: function (form,AddressUrl) {
+            for (var i = 0; i < form.elements.length; i++) {
+                if (form.elements[i].nodeName === "INPUT") {
+                    Operation.data[form.elements[i].name] = form.elements[i].value 
+                }
             }
             $.ajax({
                 url: AddressUrl,
                 data: Operation.data,
                 success: function () {
-
-
                 },
             });
 

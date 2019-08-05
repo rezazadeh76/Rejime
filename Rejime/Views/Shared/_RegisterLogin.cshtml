@@ -42,23 +42,14 @@
                 <h1>ثبت نام</h1>
 
                 <form autocomplete="off">
-                    @* action="/Account/SendAuthenticationLink" method="post" id="Register" *@
                     <div class="top-row">
                         <div class="field-wrap">
-                            @* <label>
-                                نام<span class="req">*</span>
-                                  </label>
-                                <input type="text" required autocomplete="off" name="txtName" maxlength="100" data-bv-notempty-message="فیلد نام الزامی است" />*@
                             @Html.LabelFor(Model => Model.FirstName, "نام*")
                             @Html.TextBoxFor(model => model.FirstName, new { @name = "txtName" })
                             @Html.ValidationMessageFor(model => model.FirstName)
                         </div>
 
                         <div class="field-wrap">
-                            @*<label>
-                                    نام خانوادگی<span class="req">*</span>
-                                </label>
-                                <input type="text" required autocomplete="off" name="txtFamily" />*@
                             @Html.LabelFor(Model => Model.LastName, "نام خانوادگی*")
                             @Html.TextBoxFor(model => model.LastName, new { @name = "txtFamily", })
                             @Html.ValidationMessageFor(model => model.LastName)
@@ -66,16 +57,11 @@
                     </div>
 
                     <div class="field-wrap">
-                        @*<label>
-                                ایمیل<span class="req">*</span>
-                            </label>
-                            <input type="email" required autocomplete="off" name="txtMail" />*@
                         @Html.LabelFor(Model => Model.Email, "ایمیل*")
                         @Html.TextBoxFor(model => model.Email, new { @name = "txtMail" })
                         @Html.ValidationMessageFor(model => model.Email)
                     </div>
-                    <button class="button button-block" onClick="Operation.processData(this.form,1,'/Account/SendAuthenticationLink')">تایید</button>
-
+                   <button class="button button-block" onClick="Operation.SendData(this.form,'/Account/SendAuthenticationLink')">تایید</button>
                 </form>
 
             </div>
