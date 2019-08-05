@@ -1,6 +1,21 @@
 ﻿@model Rejime.Models.User
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<style>
+    /* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #edebd9 inset !important;
+}
+input:-webkit-autofill:focus{
+        -webkit-box-shadow: 0 0 0 30px #edebd9 inset !important;
+
+}
+input:-webkit-autofill {
+    -webkit-text-fill-color: #00848c !important;
+}
+</style>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -22,17 +37,15 @@
 
                             <form action="/" method="post">
                                 <div class="field-wrap">
-                                    <label>
-                                        نام کاربری<span class="req">*</span>
-                                    </label>
-                                    <input type="email" required autocomplete="off" />
+                                    @Html.LabelFor(Model => Model.UserName, "نام کاربری*")
+                                    @Html.TextBoxFor(model => model.UserName)
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "Validate" })
                                 </div>
 
                                 <div class="field-wrap">
-                                    <label>
-                                        کلمه عبور<span class="req">*</span>
-                                    </label>
-                                    <input type="password" required autocomplete="off" />
+                                    @Html.LabelFor(Model => Model.Passwords, "کلمه عبور*")
+                                    @Html.TextBoxFor(model => model.Passwords)
+                                    @Html.ValidationMessageFor(model => model.Passwords, "", new { @class = "Validate" })
                                 </div>
 
                                 <p class="forgot"><a href="#">پسوردم را فراموش کردم</a></p>
@@ -48,7 +61,7 @@
                         <div id="signup">
                             <h1>ثبت نام</h1>
 
-                            <form autocomplete="off" id="Register">
+                            <form  id="Register">
                                 <div class="top-row">
                                     <div class="field-wrap">
                                         @Html.LabelFor(Model => Model.FirstName, "نام*")
@@ -114,7 +127,5 @@
         </div>*@
 </div>
         <script>
-            $('#cclose').click(function () {
-                window.parent.jQuery('#exampleModal').dialog('close');
-            });
+
         </script>
