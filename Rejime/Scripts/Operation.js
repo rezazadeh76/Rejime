@@ -14,7 +14,6 @@ if (window.Operation == undefined) {
             //}
             event.preventDefault();
             if ($("#" + FormName).valid()) {
-
                 var data = $("#" + FormName).serialize();
                 $.ajax({
                     type: "POST",
@@ -22,7 +21,6 @@ if (window.Operation == undefined) {
                     contenttype: "application/json",
                     data: data,
                     success: function (msg) {
-                    //    $('#exampleModal').modal('hide');
                             setTimeout(function () { $(".btn-blue").focus() }, 10);
                             //======== Alert  ===========
                             $.alert({
@@ -36,8 +34,6 @@ if (window.Operation == undefined) {
                                         text: 'تایید',
                                         btnClass: 'btn-blue',
                                         action: function () {
-                                       //     $('#exampleModal').modal('hide');
-
                                         }
                                     },
 

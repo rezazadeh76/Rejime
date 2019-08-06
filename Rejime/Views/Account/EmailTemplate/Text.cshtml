@@ -3,16 +3,71 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title></title>
+    <style>
+   .btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+  a {
+    text-transform: none;
+    text-decoration:none
+}
+        .btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}  a {
+    -webkit-appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: buttonface;
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+}
+
+    </style>
 </head>
+
 <body>
     <div style="text-align:center;background-color:orange;font-size:25px;padding:0.7%">
         <b style="color:white;vertical-align:middle;">سلامت یار</b>
     </div>
     <div>
         <pre style="font-size:15px;text-align:right">
-             <span>Family</span>  با سلام کاربر گرامی     
+             <span>Family</span> کاربر عزیز، سلام   
                      به سایت سلامت یار خوش آمدید      
-             برای تکمیل فرایند ثبت نام خود برروی <a href="@ViewBag.ConfirmationLink">اینجا</a> کلیک نمایید  
+             مرحله اولیه ثبت نام شما انجام شده است. لطفا برای فعالسازی حساب کاربری خود و تکمیل مراحل ثبت نام از طریق دکمه زیر اقدام نمایید.
+              <a  class="btn btn-info" href="@ViewBag.ConfirmationLink">فعالسازی حساب کاربری</a>
+       
         </pre>
     </div>
 </body>

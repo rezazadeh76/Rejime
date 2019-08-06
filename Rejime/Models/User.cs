@@ -20,22 +20,24 @@ namespace Rejime.Models
         #region khodadadi
         EF db = new EF();
         public int id { get; set; }
-        //[RegularExpression(@"^[A-Z]+[a-zA-Z'\s]*$")]
+        [RegularExpression(@"^([آ-ی ءa-zA-Z]+\S?)$", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
         [Required(ErrorMessage = "لطفا نام را وارد نمایید")]
         [Display(Name = "نام")]
         public string FirstName { get; set; }
 
-
+        [RegularExpression(@"^([آ-ی ءa-zA-Z]+\S?)$", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
         [Required(ErrorMessage = "لطفا نام خانوادگی را وارد نمایید")]
         [Display(Name = "نام خانوادگی")]
         public string LastName { get; set; }
 
-
-        [StringLength(100)]
+        [StringLength(100,ErrorMessage ="طول بیش از حد مجاز است")]
+        [Display(Name ="نام کاربری")]
         public string UserName { get; set; }
-        [StringLength(100)]
+
+        [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
+        [Display(Name = "کلمه عبور")]
         public string Passwords { get; set; }
 
         [ForeignKey("genderTable")]
@@ -46,10 +48,12 @@ namespace Rejime.Models
         [Display(Name = "ایمیل ")]
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
          @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
-         @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "فرمت ایمیل نادرست است")]
+         @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
         public string Email { get; set; }
 
-        [StringLength(11)]
+
+        [StringLength(11, ErrorMessage = "طول بیش از حد مجاز است")]
+        [Display(Name = "موبایل")]
         public string Moblie { get; set; }
         [StringLength(50)]
         public string ImageName { get; set; }
@@ -96,6 +100,10 @@ namespace Rejime.Models
                 var error = ex.Message;
                 return "در هنگام ارسال لینک فعال سازی مشکلی به وجود آمده است";
             }
+        }
+        public bool CheckCodeConfirm(string Code)
+        {
+            return entity.User.Any(item => item.CodeConfirm == Code);
         }
         //public bool Authentication()
         //{

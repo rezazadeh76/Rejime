@@ -12,7 +12,7 @@ namespace Rejime.Controllers
     public class AccountController : Controller
     {
         #region khodadadi
-        //[HttpPost]
+        [HttpPost]
         //[ValidateAntiForgeryToken]
         //Send Authentication Linke 
         public ContentResult SendAuthenticationLink(User obj)
@@ -24,9 +24,11 @@ namespace Rejime.Controllers
         }
         public ActionResult Confirm(string reg)
         {
-            string s = reg;
-
-            return View();
+            if (DALS.ObjUser.CheckCodeConfirm(reg))
+            {
+                return View(model:"<div class='alert alert-success col-6'> ثبت نام شما <strong> با موفقیت </strong> انجام شد</div>");
+            }
+            return View(model:"<div class='alert alert-danger col-6'>شما به این صفحه دسترسی ندارید</div>");
         }
         #endregion
 
