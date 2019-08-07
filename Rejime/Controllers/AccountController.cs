@@ -26,9 +26,9 @@ namespace Rejime.Controllers
         {
             if (DALS.ObjUser.CheckCodeConfirm(reg))
             {
-                return View(model:"<div class='alert alert-success col-6'> ثبت نام شما <strong> با موفقیت </strong> انجام شد</div>");
+                return View(model: "<div class='alert alert-success col-6'> ثبت نام شما<strong> با موفقیت </strong>  انجام شد &nbsp;<span class='fa fa-check' style='font-size:28px'></span></div>");
             }
-            return View(model:"<div class='alert alert-danger col-6'>شما به این صفحه دسترسی ندارید</div>");
+            return View(model: "<div class='alert alert-danger col-6'>شما به این صفحه دسترسی ندارید &nbsp;<span class='fa fa-warning' style='font-size:28px'></span></div>");
         }
         #endregion
 

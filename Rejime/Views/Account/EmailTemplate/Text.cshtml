@@ -8,12 +8,18 @@
     color: #fff;
     background-color: #17a2b8;
     border-color: #17a2b8;
+    padding:8%
 }
   a {
     text-transform: none;
     text-decoration:none
 }
-        .btn {
+   .btn:hover{
+       background-color:#1ebbd4;
+       cursor:pointer
+   }
+ .btn {
+    border-radius:5px;
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -62,13 +68,14 @@
         <b style="color:white;vertical-align:middle;">سلامت یار</b>
     </div>
     <div>
-        <pre style="font-size:15px;text-align:right">
-             <span>Family</span> کاربر عزیز، سلام   
-                     به سایت سلامت یار خوش آمدید      
-             مرحله اولیه ثبت نام شما انجام شده است. لطفا برای فعالسازی حساب کاربری خود و تکمیل مراحل ثبت نام از طریق دکمه زیر اقدام نمایید.
-              <a  class="btn btn-info" href="@ViewBag.ConfirmationLink">فعالسازی حساب کاربری</a>
-       
-        </pre>
+        <div style="font-size:15px;text-align:right;margin-top:2%" dir="rtl">
+            <div>
+                کاربر عزیز <span>Family</span>، سلام
+            </div>
+            به سایت سلامت یار خوش آمدید
+            مرحله اولیه ثبت نام شما انجام شده است. لطفا برای فعالسازی حساب کاربری خود و تکمیل مراحل ثبت نام از طریق دکمه زیر اقدام نمایید.
+        </div>
+        <div style="margin-right:60px;float:right;margin-top:1%"><a class="btn btn-info" href="@ViewBag.ConfirmationLink">فعالسازی حساب کاربری</a></div>
     </div>
 </body>
 </html>
