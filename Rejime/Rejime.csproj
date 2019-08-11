@@ -118,6 +118,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\preloader.css" />
     <Content Include="Content\query-confirm.min.css" />
     <Content Include="Content\reset.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -132,8 +133,10 @@
     <Content Include="fonts\IRANSansWeb%28FaNum%29.ttf" />
     <Content Include="Scripts\bootstrap-validate.js" />
     <Content Include="Scripts\jquery-confirm.js" />
+    <Content Include="Scripts\jquery.preloader.js" />
     <Content Include="Scripts\Operation.js" />
     <Content Include="Views\Account\EmailTemplate\Text.cshtml" />
+    <Content Include="Content\preloader.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\headerimage.jpg" />
     <Content Include="Images\headerimage2.jpg" />

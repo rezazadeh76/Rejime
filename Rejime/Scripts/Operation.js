@@ -4,7 +4,14 @@ if (window.Operation == undefined) {
        // data: {},
         init: function () {
         },
-    
+        beforeSend: function () {
+            $('.Main_Div').preloader({
+                text: 'لطفا منتظر بمانید',
+            });
+        },
+        complete: function () {
+            $('.Main_Div').preloader('remove')
+        },
         SendData: function (FormName, AddressUrl) {
             //for (var i = 0; i < form.elements.length; i++) {
             //    if (form.elements[i].nodeName === "INPUT") {
@@ -12,6 +19,7 @@ if (window.Operation == undefined) {
             //        alert(Operation.data[form.elements[i].name])
             //    }
             //}
+            Operation.beforeSend();
             event.preventDefault();
             if ($("#" + FormName).valid()) {
                 var data = $("#" + FormName).serialize();
@@ -21,7 +29,10 @@ if (window.Operation == undefined) {
                     contenttype: "application/json",
                     data: data,
                     success: function (msg) {
-                            setTimeout(function () { $(".btn-blue").focus() }, 10);
+                        setTimeout(function () {
+                            Operation.complete();
+                            $(".btn-blue").focus()
+                        }, 10);
                             //======== Alert  ===========
                             $.alert({
                                 title: 'تایید',
