@@ -1,7 +1,57 @@
-﻿@model string
+﻿@model Rejime.Models.User
 @{
     ViewBag.Title = "Confirm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    if (ViewBag.alert == "")
+    {
+      <div class='alert alert-danger offset-lg-3 col-lg-6 offset-lg-3 col-lg-6 offset-sm-2 col-sm-8 offset-1 col-10'>شما به این صفحه دسترسی ندارید &nbsp;<span class='fa fa-warning' style='font-size:28px'></span></div>
+    }
+    else
+    {
+        @Html.Raw(ViewBag.alert)
+        <div class="offset-lg-3 col-lg-6 offset-lg-3 col-lg-6 offset-sm-2 col-sm-8 offset-1 col-10 pl-0 pr-0">
+            <div class="card border-success mb-3 ">
+                <div class="card-header ">تعیین نام کاربری و کلمه عبور <span class="fa fa-user-plus"></span></div>
+                <div class="card-body text-success">
+                    @Html.AntiForgeryToken()
+                    <form action="/" method="post">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-1 col-1">
+                                <img src="~/Images/users_lock.png" class="img-fluid" />
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+                                <div style="float:right">
+                                    @Html.LabelFor(Model => Model.UserName, "نام کاربری*", new { @class = " col-form-label " })
+                                </div>
+                                <div class="form-group  row">
+                                    <div class="col-12">
+                                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @Value = "" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "Validate col-12" })
+                                </div>
+                                <div style="float:right">
+                                    @Html.LabelFor(Model => Model.Passwords, "کلمه عبور *", new { @class = " col-form-label " })
+                                </div>
+                                <div class="form-group  row">
+                                    <div class="col-12">
+                                        @Html.TextBoxFor(model => model.Passwords, new { @class = "form-control" , @Value = ""})
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Passwords, "", new { @class = "Validate col-12" })
+                                </div>
 
-@Html.Raw(Model)
+                                <button class="btn btn-info float-left"> تایید</button>
+                            </div>
+                        </div>
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+

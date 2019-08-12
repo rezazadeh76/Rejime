@@ -17,6 +17,8 @@ namespace Rejime.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.message = "<div class='alert alert-danger col-6'>شما به این صفحه دسترسی ندارید &nbsp;<span class='fa fa-warning' style='font-size:28px'></span></div>";
+
             return View(new User());
         }
         public ActionResult LoadMenu()

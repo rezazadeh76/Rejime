@@ -39,13 +39,13 @@
                             <form action="/" method="post">
                                 <div class="field-wrap">
                                     @Html.LabelFor(Model => Model.UserName, "نام کاربری*")
-                                    @Html.TextBoxFor(model => model.UserName)
+                                    @Html.TextBoxFor(model => model.UserName,new { @Value = ""})
                                     @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "Validate" })
                                 </div>
 
                                 <div class="field-wrap">
                                     @Html.LabelFor(Model => Model.Passwords, "کلمه عبور*")
-                                    @Html.TextBoxFor(model => model.Passwords)
+                                    @Html.TextBoxFor(model => model.Passwords,new { @Value=""})
                                     @Html.ValidationMessageFor(model => model.Passwords, "", new { @class = "Validate" })
                                 </div>
 

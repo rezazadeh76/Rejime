@@ -14,11 +14,18 @@ using System.Web.Hosting;
 using System.ComponentModel;
 //for Timer
 using System.Timers;
+using System.Data.Entity.Validation;
 
 namespace Rejime.Models
 {
     public class User:DALS
     {
+        public User()
+        {
+            ID_gender = 2;
+            UserName = "admin";
+            Passwords = "admin";
+        }
         #region khodadadi
         public int id { get; set; }
         [RegularExpression(@"^([آ-ی ءa-zA-Z]+\S?)$", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
@@ -33,13 +40,13 @@ namespace Rejime.Models
         [Display(Name = "نام خانوادگی")]
         public string LastName { get; set; }
 
+        [Required(ErrorMessage = "لطفا نام کاربری را وارد نمایید")]
         [StringLength(100,ErrorMessage ="طول بیش از حد مجاز است")]
         [Display(Name ="نام کاربری")]
         public string UserName { get; set; }
 
         [PasswordPropertyText]
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
-        [RegularExpression(@"^(?=.{8})(?=.*\W)", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
         [Required(ErrorMessage = "لطفا کلمه عبور را وارد نمایید")]
         [Display(Name = "کلمه عبور")]
         public string Passwords { get; set; }
@@ -164,8 +171,15 @@ namespace Rejime.Models
                 entity.SaveChanges();
                 return "اطلاعات با موفقیت ذخیره شد";
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException e)
             {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        var error = "Property: " + ve.PropertyName + ", Error: " + ve.ErrorMessage;
+                    }
+                }
                 return "در ذخیره سازی اطلاعات مشکلی رخ داده است";
             }
         }
