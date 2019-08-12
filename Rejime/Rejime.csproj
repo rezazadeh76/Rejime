@@ -131,6 +131,7 @@
     <Content Include="Content\scss\Login.scss" />
     <Content Include="fonts\iran Sans.ttf" />
     <Content Include="fonts\IRANSansWeb%28FaNum%29.ttf" />
+    <Content Include="Images\users_lock.png" />
     <Content Include="Scripts\bootstrap-validate.js" />
     <Content Include="Scripts\jquery-confirm.js" />
     <Content Include="Scripts\jquery.preloader.js" />

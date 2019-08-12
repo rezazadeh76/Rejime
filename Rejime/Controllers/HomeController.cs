@@ -14,9 +14,10 @@ namespace Rejime.Controllers
 
         #region khodadadi
         // GET: /Home/
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View(new User());
         }
         public ActionResult LoadMenu()
         {

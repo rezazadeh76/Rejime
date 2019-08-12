@@ -19,9 +19,9 @@ if (window.Operation == undefined) {
             //        alert(Operation.data[form.elements[i].name])
             //    }
             //}
-            Operation.beforeSend();
             event.preventDefault();
             if ($("#" + FormName).valid()) {
+                Operation.beforeSend();
                 var data = $("#" + FormName).serialize();
                 $.ajax({
                     type: "POST",

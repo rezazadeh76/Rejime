@@ -37,7 +37,10 @@ namespace Rejime.Models
         [Display(Name ="نام کاربری")]
         public string UserName { get; set; }
 
+        [PasswordPropertyText]
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
+        [RegularExpression(@"^(?=.{8})(?=.*\W)", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
+        [Required(ErrorMessage = "لطفا کلمه عبور را وارد نمایید")]
         [Display(Name = "کلمه عبور")]
         public string Passwords { get; set; }
 

@@ -2,17 +2,17 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <style>
     /* Change the white to any color ;) */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
+#exampleModal input:-webkit-autofill,
+#exampleModal input:-webkit-autofill:hover,
 
-input:-webkit-autofill:active {
+#exampleModal input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #edebd9 inset !important;
 }
-input:-webkit-autofill:focus{
+#exampleModal input:-webkit-autofill:focus{
         -webkit-box-shadow: 0 0 0 30px #edebd9 inset !important;
 
 }
-input:-webkit-autofill {
+#exampleModal input:-webkit-autofill {
     -webkit-text-fill-color: #00848c !important;
 }
 </style>
@@ -24,7 +24,7 @@ input:-webkit-autofill {
 
                 <div class="form">
                     <div class="row">
-                        <button type="button" class="close" data-dismiss="modal" style="margin-left: 95%; ">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" style="margin-left: 95%;margin-top:-10px ">&times;</button>
                     </div>
                     <ul class="tab-group">
                         <li class="tab "><a href="#signup">ثبت نام</a></li>
@@ -32,8 +32,9 @@ input:-webkit-autofill {
                     </ul>
 
                     <div class="tab-content">
+                        @Html.AntiForgeryToken()
                         <div id="login">
-                            <h1>ورود به حساب کاربری</h1>
+                            <h3>ورود به حساب کاربری</h3>
 
                             <form action="/" method="post">
                                 <div class="field-wrap">
@@ -56,12 +57,11 @@ input:-webkit-autofill {
 
                         </div>
                         @*@using (Html.BeginForm("SendAuthenticationLink", "Account", FormMethod.Post, new { autocomplete="off"}))
-            {*@
-                        @Html.AntiForgeryToken()
+        {*@
                         <div id="signup">
-                            <h1>ثبت نام</h1>
+                            <h3>ثبت نام</h3>
 
-                            <form  id="Register">
+                            <form id="Register">
                                 <div class="top-row">
                                     <div class="field-wrap">
                                         @Html.LabelFor(Model => Model.FirstName, "نام*")

@@ -1,6 +1,7 @@
 ﻿/* Define user khodadadi*/
 .Validate {
     color: red;
+    text-align:right
 }
 .modal-body{
     padding:0px !important;
@@ -16,9 +17,7 @@
     box-sizing: border-box;
 }
 
-html {
-    overflow-y: scroll;
-}
+
 
 @font-face {
     font-family: 'IRANSans';
@@ -37,63 +36,65 @@ a {
         color: #036b71;
     }
 
-.form {
-    background:#edebd9;
+#exampleModal .modal-dialog .form {
+    background: #edebd9;
     padding: 40px;
     max-width: 600px;
-   margin: 40px auto;
+    margin: 40px auto;
     border-radius: 4px;
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
 
-.tab-group {
+#exampleModal .tab-group {
     list-style: none;
     padding: 0;
-    margin: 0 0 40px 0;
+    margin: 0 0 20px 0;
 }
 
-    .tab-group:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+#exampleModal .tab-group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
 
-    .tab-group li a {
-        display: block;
-        text-decoration: none;
-        padding: 15px;
-        background: #e2e1d9;
-        color: #a0b3b0;
-        font-size: 20px;
-        float: left;
-        width: 50%;
-        text-align: center;
-        cursor: pointer;
-        transition: .5s ease;
-    }
+#exampleModal .tab-group li a {
+    display: block;
+    text-decoration: none;
+    padding: 15px;
+    background: #e2e1d9;
+    color: #a0b3b0;
+    font-size: 20px;
+    float: left;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s ease;
+}
 
-        .tab-group li a:hover {
-            background: #fec20f;
-            color: #ffffff;
-        }
+#exampleModal .tab-group li a:hover {
+    background: #fec20f;
+    color: #ffffff;
+    border-color:red
+}
 
-    .tab-group .active a {
-        background: #fec20f;
-        color: #ffffff;
-    }
+   /* .tab-group .active a */
+#exampleModal .tab-group .active a {
+    background: #fec20f;
+    color: #ffffff;
+}
 
-.tab-content > div:last-child {
+#exampleModal .tab-content > div:last-child {
     display: none;
 }
 
-h1 {
+#exampleModal  h3 {
     text-align: center;
     color: #1c1f4c;
     font-weight: 300;
-    margin: 0 0 40px;
+    margin: 0 0 20px;
 }
 
-label {
+#exampleModal .modal-dialog  label {
     position: absolute;
     -webkit-transform: translateY(6px);
     transform: translateY(6px);
@@ -106,27 +107,27 @@ label {
     text-align: right
 }
 
-    label .req {
+    #exampleModal .modal-dialog label .req {
         margin: 2px;
         color: #00848c;
     }
 
-    label.active {
-        -webkit-transform: translateY(50px);
-        transform: translateY(50px);
-        right: 2px;
-        font-size: 14px;
+#exampleModal .modal-dialog label.active {
+    -webkit-transform: translateY(50px);
+    transform: translateY(50px);
+    right: 2px;
+    font-size: 14px;
+}
+
+    #exampleModal .modal-dialog label.active .req {
+        opacity: 0;
     }
 
-        label.active .req {
-            opacity: 0;
-        }
-
-    label.highlight {
+    #exampleModal .modal-dialog label.highlight {
         color: #00848c;
     }
 
-input, textarea {
+#exampleModal input, #exampleModal textarea {
     font-size: 22px;
     display: block;
     width: 100%;
@@ -141,44 +142,44 @@ input, textarea {
     transition: border-color .25s ease, box-shadow .25s ease;
 }
 
-    input:focus, textarea:focus {
-        outline: 0;
-        border-color: #00848c;
-    }
+#exampleModal input:focus, #exampleModal textarea:focus {
+    outline: 0;
+    border-color: #00848c;
+}
 
-textare
-{
+#exampleModal textarea {
     border: 2px solid #a0b3b0;
     resize: vertical;
 }
 
-.field-wrap {
+#exampleModal .field-wrap {
     position: relative;
     margin-bottom: 40px;
+ 
 }
 
-.top-row:after {
+#exampleModal .top-row:after {
     content: "";
     display: table;
     clear: both;
 }
 
-.top-row > div {
+#exampleModal .top-row > div {
     float: right;
     width: 48%;
     margin-left: 4%;
 }
 
-    .top-row > div:last-child {
+    #exampleModal .top-row > div:last-child {
         margin: 0;
     }
 
-.button {
+#exampleModal .button {
     border: 0;
     outline: none;
     border-radius: 0;
     padding: 15px 0;
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .1em;
@@ -188,18 +189,17 @@ textare
     -webkit-appearance: none;
 }
 
-    .button:hover, .button:focus {
+    #exampleModal .button:hover, #exampleModal .button:focus {
         background: #036b71;
-        cursor:pointer
+        cursor: pointer
     }
 
-.button-block {
+#exampleModal .button-block {
     display: block;
     width: 100%;
 }
 
-.forgot {
+#exampleModal .forgot {
     margin-top: -20px;
     text-align: right;
-}body {
 }
