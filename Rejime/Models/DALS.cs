@@ -18,7 +18,7 @@ namespace Rejime.Models
         public EF Entity = new EF();
         public static Menu ObjMenu = new Menu();
         public static User ObjUser = new User();
-
+        public static System.Timers.Timer aTimer = new System.Timers.Timer();
         public static string NewToken()
         {
             using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
@@ -39,6 +39,11 @@ namespace Rejime.Models
                     return sBuilder.ToString();
                 }
             }
+        }
+        public class QueryResult
+        {
+            public string date { get; set; }
+            public string time { get; set; }
         }
         #endregion
     }

@@ -190,6 +190,7 @@ textare
 
     .button:hover, .button:focus {
         background: #036b71;
+        cursor:pointer
     }
 
 .button-block {

@@ -18,7 +18,10 @@ namespace Rejime.Controllers
         public ContentResult SendAuthenticationLink(User obj)
         {
             if (ModelState.IsValid)
-               return Content(obj.SendAuthenticationLink());
+            {
+                obj.ID_gender = 2;
+                return Content(obj.SendAuthenticationLink());
+            }
 
             return Content("");
         }

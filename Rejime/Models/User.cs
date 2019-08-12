@@ -12,13 +12,14 @@ using System.Net;
 using System.Net.Mail;
 using System.Web.Hosting;
 using System.ComponentModel;
+//for Timer
+using System.Timers;
 
 namespace Rejime.Models
 {
     public class User:DALS
     {
         #region khodadadi
-        EF db = new EF();
         public int id { get; set; }
         [RegularExpression(@"^([آ-ی ءa-zA-Z]+\S?)$", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
@@ -63,25 +64,23 @@ namespace Rejime.Models
         [StringLength(10)]
         public string Date { get; set; }
         [StringLength(10)]
-        public string Expire { get; set; }
+        public string Time { get; set; }
         [DefaultValue("false")]
         public bool Active { get; set; }
         [StringLength(32)]
         public string CodeConfirm { get; set; }
         public virtual Gender genderTable { get; set; }
 
-        EF entity = new EF();
+        static  EF entity = new EF();
    
         public string SendAuthenticationLink()
         {
             string token = NewToken();
             string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/Views/Account/EmailTemplate/")+ "Text"+".cshtml");
-            //var regInfo = db.User.Where(x => x.id == regID).FirstOrDefault();
             var url = "http://localhost:7872/" + "Account/Confirm?reg=" + token;
             body = body.Replace("@ViewBag.ConfirmationLink", url);
             body = body.Replace("Family", this.LastName+ ' '+this.FirstName );
             body = body.ToString();
-
             var client = new SmtpClient("smtp.gmail.com", 587);
             client.Credentials = new NetworkCredential("salamatyarr@gmail.com", "5713Love262*2");
             client.EnableSsl = true;
@@ -91,9 +90,16 @@ namespace Rejime.Models
             {
                 client.Send(message);
                 this.CodeConfirm = token;
-                this.ID_gender = 2;
+
+                //گرفتن تاریخ و ساعت جاری 
+                var DateTimeCurrent = entity.Database.SqlQuery<QueryResult>("select [dbo].G2J(GETDATE()) as date,convert(varchar(8), GETDATE(), 108) as time").Single();
+                this.Date = DateTimeCurrent.date;
+                this.Time = DateTimeCurrent.time;
+                //گرفتن تاریخ و ساعت جاری 
+
                 this.Create(this);
-                return "لینک فعال سازی به ایمیل شما ارسال شده است، لطفا ایمیل خود را بررسی نمایید";
+                Timer();
+                return "لینک فعال سازی به ایمیل شما ارسال شده است مدت زمان اعتبار لینک فعال سازی 1 ساعت می باشد، لطفا ایمیل خود را بررسی نمایید";
             }
             catch (Exception ex)
             {
@@ -101,9 +107,37 @@ namespace Rejime.Models
                 return "در هنگام ارسال لینک فعال سازی مشکلی به وجود آمده است";
             }
         }
+        //Timer Code confirm
+        public static void Timer()
+        {
+            aTimer.Elapsed += new ElapsedEventHandler(DeleteRecordNotActive);
+            aTimer.Interval = 3600000;
+            aTimer.Enabled = true;
+        }
+        // پس از دوساعت اگر کاربر نسبت به فعالسازی حساب کاربری اقدام نکند اطلاعات آن حذف میشود
+        public static void DeleteRecordNotActive(object source, ElapsedEventArgs e)
+        {
+
+            entity.User.RemoveRange(entity.User.Where(x => x.Active == false));
+            try
+            {
+                entity.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+            }
+            aTimer.Enabled = false;
+        }
         public bool CheckCodeConfirm(string Code)
         {
-            return entity.User.Any(item => item.CodeConfirm == Code);
+
+            if(entity.User.Any(item => item.CodeConfirm == Code))
+            {
+                var obj = entity.User.Where(x => x.CodeConfirm == Code).Single();
+                obj.Active = true;
+                return true;
+            }
+            return false;
         }
         //public bool Authentication()
         //{
@@ -166,28 +200,29 @@ namespace Rejime.Models
         //        return "در ویرایش اطلاعات مشکلی رخ داده است";
         //    }
         //}
-        //public string Delete(int ID)
-        //{
-        //    if (entity.User.Find(ID)!=null)
-        //    {
-        //        entity.User.Remove(entity.User.Find(ID));
 
-        //        try
-        //        {
-        //            entity.SaveChanges();
-        //            return "اطلاعات با حذف ذخیره شد";
-        //        }
-        //        catch (Exception)
-        //        {
+    
+        public string Delete(int ID)
+        {
+            if (entity.User.Find(ID) != null)
+            {
+                entity.User.Remove(entity.User.Find(ID));
+                try
+                {
+                    entity.SaveChanges();
+                    return "اطلاعات با موفقیت حذف شد";
+                }
+                catch (Exception)
+                {
 
-        //            return "در حذف اطلاعات مشکلی رخ داده است";
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return "";
-        //    }
-        //}
+                    return "در حذف اطلاعات مشکلی رخ داده است";
+                }
+            }
+            else
+            {
+                return "";
+            }
+        }
         #endregion
     }
 
