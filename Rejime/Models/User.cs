@@ -42,6 +42,7 @@ namespace Rejime.Models
         [Display(Name = "نام خانوادگی*")]
         public string LastName { get; set; }
 
+        [RegularExpression(@"^[a-zA-Z0-9_\W]\S+$", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
         [Required(ErrorMessage = "لطفا نام کاربری را وارد نمایید")]
         [StringLength(100,ErrorMessage ="طول بیش از حد مجاز است")]
         [Display(Name ="نام کاربری*")]
@@ -49,14 +50,14 @@ namespace Rejime.Models
 
         [StringLength(20, ErrorMessage = "طول بیش از حد مجاز است")]
         [Required(ErrorMessage = "لطفا کلمه عبور را وارد نمایید")]
-        [RegularExpression("^.{6,}$",ErrorMessage ="حداقل طول کلمه عبور 6 کرکتر هست")]
+        [RegularExpression("^.{6,}$",ErrorMessage ="حداقل طول کلمه عبور 6 کراکتر است")]
         [Display(Name = "کلمه عبور*")]
         public string Passwords { get; set; }
 
 
         [StringLength(20, ErrorMessage = "طول بیش از حد مجاز است")]
         [Required(ErrorMessage = "لطفا تایید کلمه عبور را وارد نمایید")]
-        [Compare("Passwords", ErrorMessage = " کلمه عبور و تایید کلمه عبور باید مطابقت داشته باشند.")]
+        [System.Web.Mvc.Compare("Passwords", ErrorMessage = " کلمه عبور و تایید کلمه عبور مطابقت ندارند")]
         [Display(Name = "تایید کلمه عبور*")]
         public string ConfirmPassword { get; set; }
         [ForeignKey("genderTable")]
