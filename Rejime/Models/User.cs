@@ -30,6 +30,7 @@ namespace Rejime.Models
         }
         #region khodadadi
         public int id { get; set; }
+
         [RegularExpression(@"^([آ-ی ءa-zA-Z]+\S?)$", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
         [Required(ErrorMessage = "لطفا نام را وارد نمایید")]
@@ -60,6 +61,7 @@ namespace Rejime.Models
         [System.Web.Mvc.Compare("Passwords", ErrorMessage = " کلمه عبور و تایید کلمه عبور مطابقت ندارند")]
         [Display(Name = "تایید کلمه عبور*")]
         public string ConfirmPassword { get; set; }
+
         [ForeignKey("genderTable")]
         public int ID_gender { get; set; }
 

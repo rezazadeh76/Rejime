@@ -19,9 +19,11 @@ if (window.Operation == undefined) {
             //        alert(Operation.data[form.elements[i].name])
             //    }
             //}
+            alert(0)
             event.preventDefault();
             if ($("#" + FormName).valid()) {
                 Operation.beforeSend();
+                alert(1)
                 var data = $("#" + FormName).serialize();
                 $.ajax({
                     type: "POST",
