@@ -31,7 +31,7 @@ namespace Rejime.Controllers
             return View(new User());
         }
         [HttpPost]
-        public ContentResult Confirm(User obj)
+        public ContentResult Confirm7(User obj)
         {
             return Content("");
         }
