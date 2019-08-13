@@ -15,6 +15,7 @@ using System.ComponentModel;
 //for Timer
 using System.Timers;
 using System.Data.Entity.Validation;
+using System.Web.Security;
 
 namespace Rejime.Models
 {
@@ -24,39 +25,46 @@ namespace Rejime.Models
         {
             ID_gender = 2;
             UserName = "admin";
-            Passwords = "admin";
+            Passwords = "@admin";
+            ConfirmPassword = "@admin";
         }
         #region khodadadi
         public int id { get; set; }
         [RegularExpression(@"^([آ-ی ءa-zA-Z]+\S?)$", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
         [Required(ErrorMessage = "لطفا نام را وارد نمایید")]
-        [Display(Name = "نام")]
+        [Display(Name = "نام*")]
         public string FirstName { get; set; }
 
         [RegularExpression(@"^([آ-ی ءa-zA-Z]+\S?)$", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
         [Required(ErrorMessage = "لطفا نام خانوادگی را وارد نمایید")]
-        [Display(Name = "نام خانوادگی")]
+        [Display(Name = "نام خانوادگی*")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "لطفا نام کاربری را وارد نمایید")]
         [StringLength(100,ErrorMessage ="طول بیش از حد مجاز است")]
-        [Display(Name ="نام کاربری")]
+        [Display(Name ="نام کاربری*")]
         public string UserName { get; set; }
 
-        [PasswordPropertyText]
-        [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
+        [StringLength(20, ErrorMessage = "طول بیش از حد مجاز است")]
         [Required(ErrorMessage = "لطفا کلمه عبور را وارد نمایید")]
-        [Display(Name = "کلمه عبور")]
+        [RegularExpression("^.{6,}$",ErrorMessage ="حداقل طول کلمه عبور 6 کرکتر هست")]
+        [Display(Name = "کلمه عبور*")]
         public string Passwords { get; set; }
 
+
+        [StringLength(20, ErrorMessage = "طول بیش از حد مجاز است")]
+        [Required(ErrorMessage = "لطفا تایید کلمه عبور را وارد نمایید")]
+        [Compare("Passwords", ErrorMessage = " کلمه عبور و تایید کلمه عبور باید مطابقت داشته باشند.")]
+        [Display(Name = "تایید کلمه عبور*")]
+        public string ConfirmPassword { get; set; }
         [ForeignKey("genderTable")]
         public int ID_gender { get; set; }
 
         [StringLength(100, ErrorMessage = "طول بیش از حد مجاز است")]
         [Required(ErrorMessage = "لطفا ایمیل را وارد نمایید")]
-        [Display(Name = "ایمیل ")]
+        [Display(Name = "ایمیل*")]
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
          @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
          @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "مقدار وارد شده صحیح نمی باشد")]
