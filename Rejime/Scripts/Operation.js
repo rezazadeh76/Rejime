@@ -12,6 +12,13 @@ if (window.Operation == undefined) {
         complete: function () {
             $('.Main_Div').preloader('remove')
         },
+        Call: function (FormName) {
+            alert(5)
+            if (FormName = "Confirm") {
+                alert(6)
+                window.location.replace("/Home/Index")
+            }
+        },
         SendData: function (FormName, AddressUrl) {
             //for (var i = 0; i < form.elements.length; i++) {
             //    if (form.elements[i].nodeName === "INPUT") {
@@ -19,17 +26,17 @@ if (window.Operation == undefined) {
             //        alert(Operation.data[form.elements[i].name])
             //    }
             //}
-            alert(0)
             event.preventDefault();
             if ($("#" + FormName).valid()) {
                 Operation.beforeSend();
-                alert(1)
                 var data = $("#" + FormName).serialize();
                 $.ajax({
                     type: "POST",
                     url: AddressUrl,
-                    contenttype: "application/json",
+                    //dataType:"json",
+                    //contenttype: "application/json",
                     data: data,
+           
                     success: function (msg) {
                         setTimeout(function () {
                             Operation.complete();

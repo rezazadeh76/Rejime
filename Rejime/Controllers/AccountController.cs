@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
-
+using Newtonsoft.Json;
 using Rejime.Models;
 
 namespace Rejime.Controllers
@@ -31,9 +30,11 @@ namespace Rejime.Controllers
             return View(new User());
         }
         [HttpPost]
-        public ContentResult Confirm7(User obj)
+        public JsonResult Confirm(User obj)
         {
-            return Content("");
+
+            return Json(obj,JsonRequestBehavior.AllowGet);
+
         }
         #endregion
 
