@@ -27,15 +27,18 @@ if (window.Operation == undefined) {
             //    }
             //}
             event.preventDefault();
+            alert(4)
             if ($("#" + FormName).valid()) {
+                alert(8)
                 Operation.beforeSend();
                 var data = $("#" + FormName).serialize();
                 $.ajax({
-                    type: "POST",
+                    //type: "POST",
+                    method:"POST",
                     url: AddressUrl,
                     //dataType:"json",
                     //contenttype: "application/json",
-                    data: data,
+                    data: JSON.stringify(data),
            
                     success: function (msg) {
                         setTimeout(function () {

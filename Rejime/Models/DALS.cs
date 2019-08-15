@@ -8,6 +8,7 @@ using Rejime.Models;
 //for new token for link comfirm email
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
 #endregion
 
 namespace Rejime.Models
@@ -44,6 +45,12 @@ namespace Rejime.Models
         {
             public string date { get; set; }
             public string time { get; set; }
+        }
+        public static string ResulToJson(object obj)
+        {
+            string json = JsonConvert.SerializeObject(obj);
+
+            return json;
         }
         #endregion
     }

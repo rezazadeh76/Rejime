@@ -135,6 +135,8 @@
     <Content Include="Scripts\bootstrap-validate.js" />
     <Content Include="Scripts\jquery-confirm.js" />
     <Content Include="Scripts\jquery.preloader.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\Operation.js" />
     <Content Include="Views\Account\EmailTemplate\Text.cshtml" />
     <Content Include="Content\preloader.scss" />
