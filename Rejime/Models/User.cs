@@ -92,7 +92,6 @@ namespace Rejime.Models
         public string CodeConfirm { get; set; }
         public virtual Gender genderTable { get; set; }
 
-   
         public string SendAuthenticationLink()
         {
             string token = NewToken();
@@ -112,13 +111,13 @@ namespace Rejime.Models
                 this.CodeConfirm = token;
 
                 //گرفتن تاریخ و ساعت جاری 
-                var DateTimeCurrent = Entity.Database.SqlQuery<QueryResult>("select [dbo].G2J(GETDATE()) as date,convert(varchar(8), GETDATE(), 108) as time").Single();
+                var DateTimeCurrent = GetDateTime("current");
                 this.Date = DateTimeCurrent.date;
                 this.Time = DateTimeCurrent.time;
                 //گرفتن تاریخ و ساعت جاری 
 
                 this.Create(this);
-                return "لینک فعال سازی به ایمیل شما ارسال شده است مدت زمان اعتبار لینک فعال سازی 1 ساعت می باشد، لطفا ایمیل خود را بررسی نمایید";
+                return "لینک فعال سازی به ایمیل شما ارسال شده است مدت زمان اعتبار لینک فعال سازی 2 ساعت می باشد، لطفا ایمیل خود را بررسی نمایید";
             }
             catch (Exception ex)
             {
@@ -126,31 +125,26 @@ namespace Rejime.Models
                 return "در هنگام ارسال لینک فعال سازی مشکلی به وجود آمده است";
             }
         }
-       
-      
         public bool CheckCodeConfirm(string Code)
         {
-
-            if(Entity.User.Any(item => item.CodeConfirm == Code))
-            {
-                var obj = Entity.User.Where(x => x.CodeConfirm == Code).Single();
-                obj.Active = true;
+            //بررسی گذشت دو ساعت از زمان ارسال ایمیل
+            var TwoHourBefore = GetDateTime("before");
+            var Current = GetDateTime("current");
+            var record = Entity.User.AsEnumerable().Where(
+                x => x.CodeConfirm == Code &&
+               int.Parse(x.Date.Replace("/","")) >= int.Parse( TwoHourBefore.date.Replace("/",""))&&
+               int.Parse(x.Date.Replace("/", "")) <= int.Parse(Current.date.Replace("/", "")) &&
+               int.Parse(x.Time.Replace("00:","24:").Replace(":",""))>= int.Parse(TwoHourBefore.time.Replace(":","")) &&
+               int.Parse(x.Time.Replace(":", "")) <= int.Parse(Current.time.Replace(":", ""))
+                );
+          if (record.Count() != 0){
                 return true;
             }
-            return false;
-        }
-        //public bool Authentication()
-        //{
-        //    return entity.User.Any(item => item.UserName == UserName && item.Passwords == Passwords);
-        //}
-
-        public List<User> Read()
-        {
-            return Entity.User.ToList();
-        }
-        public User Read(int? id)
-        {
-            return Entity.User.Find(id);
+            else
+            {
+                Delete(Code,TwoHourBefore.date,TwoHourBefore.time);
+                return false;
+            }
         }
         public string Create(User obj)
         {
@@ -173,6 +167,64 @@ namespace Rejime.Models
                 return "در ذخیره سازی اطلاعات مشکلی رخ داده است";
             }
         }
+        public string Update(int id, string UserName, string Passwords, string ConfirmPassword)
+        {
+            var user = Entity.User.Find(id);
+            user.UserName = UserName;
+            user.Passwords = Passwords;
+            user.ConfirmPassword = ConfirmPassword;
+            user.Active = true;
+            try
+            {
+                Entity.SaveChanges();
+                return "اطلاعات با موفقیت ذخیره شد";
+            }
+            catch (Exception)
+            {
+
+                return "در ذخیره اطلاعات مشکلی رخ داده است";
+            }
+        }
+        public string Delete(string CodeConfirm, string Date, string Time)
+        {
+            var record = Entity.User.AsEnumerable().Where(x => x.CodeConfirm == CodeConfirm ||
+              (int.Parse(x.Date.Replace("/", "")) < int.Parse(Date.Replace("/", "")) &&
+              int.Parse(x.Time.Replace(":", "")) < int.Parse(Time.Replace(":", "")) && x.Active == false));
+
+            if (record.Count() != 0)
+            {
+
+                var d = record.Count();
+                Entity.User.RemoveRange(record);
+                try
+                {
+                    Entity.SaveChanges();
+                    return "اطلاعات با موفقیت حذف شد";
+                }
+                catch (Exception)
+                {
+                    return "در حذف اطلاعات مشکلی رخ داده است";
+                }
+            }
+            else
+            {
+                return "هیچ رکوردی یافت نشد";
+            }
+        }
+        //public bool Authentication()
+        //{
+        //    return entity.User.Any(item => item.UserName == UserName && item.Passwords == Passwords);
+        //}
+
+        //public List<User> Read()
+        //{
+        //    return Entity.User.ToList();
+        //}
+        //public User Read(int? id)
+        //{
+        //    return Entity.User.Find(id);
+        //}
+
         //public string Update(User obj)
         //{
         //    entity.User.Attach(obj);
@@ -188,48 +240,7 @@ namespace Rejime.Models
         //        return "در ویرایش اطلاعات مشکلی رخ داده است";
         //    }
         //}
-        //public string Update(int ID, string FirstName, string LastName, string UserName, string Passwords, string Email)
-        //{
-        //    var user = entity.User.Find(ID);
-        //    user.FirstName = FirstName;
-        //    user.LastName = LastName;
-        //    user.Email = Email;
-        //    user.UserName =UserName ;
-        //    user.Passwords = Passwords;
-        //    try
-        //    {
-        //        entity.SaveChanges();
-        //        return "اطلاعات با موفقیت ویرایش شد";
-        //    }
-        //    catch (Exception)
-        //    {
 
-        //        return "در ویرایش اطلاعات مشکلی رخ داده است";
-        //    }
-        //}
-
-    
-        public string Delete(int ID)
-        {
-            if (Entity.User.Find(ID) != null)
-            {
-                Entity.User.Remove(Entity.User.Find(ID));
-                try
-                {
-                    Entity.SaveChanges();
-                    return "اطلاعات با موفقیت حذف شد";
-                }
-                catch (Exception)
-                {
-
-                    return "در حذف اطلاعات مشکلی رخ داده است";
-                }
-            }
-            else
-            {
-                return "";
-            }
-        }
         #endregion
     }
 

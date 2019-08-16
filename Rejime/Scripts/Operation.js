@@ -15,7 +15,6 @@ if (window.Operation == undefined) {
         OnSuccess: function (data) {
             if (data.error == false) {
                 setTimeout(function () {
-                    Operation.complete();
                     $(".btn-blue").focus()
                 }, 10);
                 //======== Alert  ===========
@@ -35,11 +34,11 @@ if (window.Operation == undefined) {
 
                     }
                 });
-                            //======== Alert  ===========
-
+                //======== Alert  ===========
             }
         },
         OnFailure: function (xhr, status) {
+
             alert('Error: ' + xhr.statusText);
         },
         SendData: function (FormName, AddressUrl) {
@@ -50,9 +49,7 @@ if (window.Operation == undefined) {
             //    }
             //}
             event.preventDefault();
-            alert(4)
             if ($("#" + FormName).valid()) {
-                alert(8)
                 Operation.beforeSend();
                 var data = $("#" + FormName).serialize();
                 $.ajax({
@@ -60,12 +57,13 @@ if (window.Operation == undefined) {
                     method:"POST",
                     url: AddressUrl,
                     //dataType:"json",
-                    //contenttype: "application/json",
-                    data: JSON.stringify(data),
+                    contenttype: "application/json",
+                    data: data,
            
                     success: function (msg) {
                         setTimeout(function () {
-                            Operation.complete();
+                            alert(55)
+                           Operation.complete();
                             $(".btn-blue").focus()
                         }, 10);
                             //======== Alert  ===========

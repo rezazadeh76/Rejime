@@ -19,7 +19,6 @@ namespace Rejime.Models
         public static EF Entity = new EF();
         public static Menu ObjMenu = new Menu();
         public static User ObjUser = new User();
-        public static System.Timers.Timer aTimer = new System.Timers.Timer();
         public static string NewToken()
         {
             using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
@@ -46,11 +45,13 @@ namespace Rejime.Models
             public string date { get; set; }
             public string time { get; set; }
         }
-        public static string ResulToJson(object obj)
+     public static QueryResult GetDateTime(string  para)
         {
-            string json = JsonConvert.SerializeObject(obj);
+            if (para == "before")
+                return Entity.Database.SqlQuery<QueryResult>("select [dbo].G2J(DATEADD(HOUR, -2, GETDATE())) as date,convert(varchar(8),DATEADD(HOUR, -2, GETDATE()), 108) as time").Single();
+            else
+                return Entity.Database.SqlQuery<QueryResult>("select [dbo].G2J(GETDATE()) as date,convert(varchar(8), GETDATE(), 108) as time").Single();
 
-            return json;
         }
         #endregion
     }

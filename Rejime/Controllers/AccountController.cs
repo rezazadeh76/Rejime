@@ -26,18 +26,19 @@ namespace Rejime.Controllers
                 ViewBag.alert = "<div class='alert alert-success offset-lg-3 col-lg-6 offset-lg-3 col-lg-6 offset-sm-2 col-sm-8 offset-1 col-10 mt-3' style='font - size:1.1rem'> ثبت نام شما<strong> با موفقیت </strong>  انجام شد &nbsp;<span class='fa fa-check' style='font-size:28px'></span></div>";
                 return View( new EF().User.Where(x => x.CodeConfirm == reg).Single());
             }
-            return View();
+            return View(new EF().User);
         }
         [HttpPost]
         public JsonResult Confirm(User obj)
         {
                 try
                 {
+                 string Msg=obj.Update(obj.id, obj.UserName, obj.Passwords, obj.ConfirmPassword);
                 return Json(
                     new{
                         data =obj,
                         error =false,
-                        message ="اطلاعات با موفقیت ذخیره شد"
+                        message = Msg
                     });
                 }
                 catch (Exception ex)
