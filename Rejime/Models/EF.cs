@@ -10,6 +10,7 @@ namespace Rejime.Models
         public EF()
             : base("name=EF")
         {
+
         }
 
         #region khodadadi

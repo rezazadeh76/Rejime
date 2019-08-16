@@ -17,16 +17,15 @@
                 <div class="card-body text-success">
                     @Html.AntiForgeryToken()
                     @using (Ajax.BeginForm("Confirm", "Account",
-                  new AjaxOptions
-                  {
-                      OnSuccess = "OnSuccess",
-                      OnFailure = "OnFailure",
-                      LoadingElementId = "progress"
-                  }))
+                    new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        OnSuccess = "Operation.OnSuccess",
+                        OnFailure = "Operation.OnFailure",
+                        LoadingElementId = "progress"
+                    }))
                     {
                         <form id="Confirm" class="Main_Div">
-                            @Html.Hidden("id")
-                            @Html.Hidden("CodeConfirm")
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-1 col-1">
                                     <img src="~/Images/users_lock.png" class="img-fluid" />
@@ -72,22 +71,3 @@
         </div>
     }
 }
-@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-<script type="text/javascript">
-    function OnSuccess(response) {
-        var message = "Person Id: " + response.id;
-        message += "\nName: " + response.FirstName;
-        message += "\nGender: " + response.LastName;
-        alert(message);
-    }
-    //function OnFailure(response) {
-    //    alert("Error occured.");
-       
-    //}
-        function OnFailure(xhr, status) {
-        alert('Error: '+xhr.statusText);
-    }
-</script>
-

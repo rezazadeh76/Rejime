@@ -12,12 +12,35 @@ if (window.Operation == undefined) {
         complete: function () {
             $('.Main_Div').preloader('remove')
         },
-        Call: function (FormName) {
-            alert(5)
-            if (FormName = "Confirm") {
-                alert(6)
-                window.location.replace("/Home/Index")
+        OnSuccess: function (data) {
+            if (data.error == false) {
+                setTimeout(function () {
+                    Operation.complete();
+                    $(".btn-blue").focus()
+                }, 10);
+                //======== Alert  ===========
+                $.alert({
+                    title: 'تایید',
+                    icon: 'fa fa-thumbs-o-up',
+                    content: data.message,
+                    rtl: true,
+                    theme: 'light',
+                    buttons: {
+                        confirm: {
+                            text: 'تایید',
+                            btnClass: 'btn-blue',
+                            action: function () {
+                            }
+                        },
+
+                    }
+                });
+                            //======== Alert  ===========
+
             }
+        },
+        OnFailure: function (xhr, status) {
+            alert('Error: ' + xhr.statusText);
         },
         SendData: function (FormName, AddressUrl) {
             //for (var i = 0; i < form.elements.length; i++) {

@@ -12,7 +12,6 @@ namespace Rejime.Controllers
     {
         #region khodadadi
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         //Send Authentication Linke 
         public ContentResult SendAuthenticationLink(User obj)
         {
@@ -32,46 +31,27 @@ namespace Rejime.Controllers
         [HttpPost]
         public JsonResult Confirm(User obj)
         {
-            
                 try
                 {
-                    var prepareForJson = new
-                    {
-                        id = obj.id,
-                        FirstName = obj.FirstName,
-                        LastName = obj.LastName,
-                        UserName = obj.UserName,
-                        Passwords = obj.Passwords,
-                        ConfirmPassword = obj.ConfirmPassword,
-                        ID_gender = obj.ID_gender,
-                        Email = obj.Email,
-                        Moblie = obj.Moblie,
-                        ImageName = obj.ImageName,
-                        ImageContent = obj.ImageContent,
-                        Image = obj.Image,
-                        Date = obj.Date,
-                        Time = obj.Time,
-                        Active = obj.Active,
-                        CodeConfirm = obj.CodeConfirm,
-                    };
-
-                //return Json(obj);
-                string res = "";
-                res = Rejime.Models.DALS.ResulToJson(new
-                {
-                    data = obj,
-                    error = false,
-                    message = "",
-                });
-                return Json(res, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-                {
-
-                    throw;
+                return Json(
+                    new{
+                        data =obj,
+                        error =false,
+                        message ="اطلاعات با موفقیت ذخیره شد"
+                    });
                 }
-                
-  
+                catch (Exception ex)
+                {
+                return Json(
+                    new
+                    {
+                        data = obj,
+                        error =true,
+                        message =ex.Message
+                    });
+            }
+
+            
 
         }
         #endregion

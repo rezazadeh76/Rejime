@@ -16,7 +16,7 @@ namespace Rejime.Models
     public  class DALS
     {
         #region khodadadi
-        public EF Entity = new EF();
+        public static EF Entity = new EF();
         public static Menu ObjMenu = new Menu();
         public static User ObjUser = new User();
         public static System.Timers.Timer aTimer = new System.Timers.Timer();

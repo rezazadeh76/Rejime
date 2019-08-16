@@ -92,7 +92,6 @@ namespace Rejime.Models
         public string CodeConfirm { get; set; }
         public virtual Gender genderTable { get; set; }
 
-        static  EF entity = new EF();
    
         public string SendAuthenticationLink()
         {
@@ -113,13 +112,12 @@ namespace Rejime.Models
                 this.CodeConfirm = token;
 
                 //گرفتن تاریخ و ساعت جاری 
-                var DateTimeCurrent = entity.Database.SqlQuery<QueryResult>("select [dbo].G2J(GETDATE()) as date,convert(varchar(8), GETDATE(), 108) as time").Single();
+                var DateTimeCurrent = Entity.Database.SqlQuery<QueryResult>("select [dbo].G2J(GETDATE()) as date,convert(varchar(8), GETDATE(), 108) as time").Single();
                 this.Date = DateTimeCurrent.date;
                 this.Time = DateTimeCurrent.time;
                 //گرفتن تاریخ و ساعت جاری 
 
                 this.Create(this);
-                Timer();
                 return "لینک فعال سازی به ایمیل شما ارسال شده است مدت زمان اعتبار لینک فعال سازی 1 ساعت می باشد، لطفا ایمیل خود را بررسی نمایید";
             }
             catch (Exception ex)
@@ -128,33 +126,14 @@ namespace Rejime.Models
                 return "در هنگام ارسال لینک فعال سازی مشکلی به وجود آمده است";
             }
         }
-        //Timer Code confirm
-        public static void Timer()
-        {
-            aTimer.Elapsed += new ElapsedEventHandler(DeleteRecordNotActive);
-            aTimer.Interval = 3600000;
-            aTimer.Enabled = true;
-        }
-        // پس از دوساعت اگر کاربر نسبت به فعالسازی حساب کاربری اقدام نکند اطلاعات آن حذف میشود
-        public static void DeleteRecordNotActive(object source, ElapsedEventArgs e)
-        {
-
-            entity.User.RemoveRange(entity.User.Where(x => x.Active == false));
-            try
-            {
-                entity.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-            }
-            aTimer.Enabled = false;
-        }
+       
+      
         public bool CheckCodeConfirm(string Code)
         {
 
-            if(entity.User.Any(item => item.CodeConfirm == Code))
+            if(Entity.User.Any(item => item.CodeConfirm == Code))
             {
-                var obj = entity.User.Where(x => x.CodeConfirm == Code).Single();
+                var obj = Entity.User.Where(x => x.CodeConfirm == Code).Single();
                 obj.Active = true;
                 return true;
             }
@@ -167,19 +146,19 @@ namespace Rejime.Models
 
         public List<User> Read()
         {
-            return entity.User.ToList();
+            return Entity.User.ToList();
         }
         public User Read(int? id)
         {
-            return entity.User.Find(id);
+            return Entity.User.Find(id);
         }
         public string Create(User obj)
         {
-            entity.User.Add(obj);
+            Entity.User.Add(obj);
 
             try
             {
-                entity.SaveChanges();
+                Entity.SaveChanges();
                 return "اطلاعات با موفقیت ذخیره شد";
             }
             catch (DbEntityValidationException e)
@@ -232,12 +211,12 @@ namespace Rejime.Models
     
         public string Delete(int ID)
         {
-            if (entity.User.Find(ID) != null)
+            if (Entity.User.Find(ID) != null)
             {
-                entity.User.Remove(entity.User.Find(ID));
+                Entity.User.Remove(Entity.User.Find(ID));
                 try
                 {
-                    entity.SaveChanges();
+                    Entity.SaveChanges();
                     return "اطلاعات با موفقیت حذف شد";
                 }
                 catch (Exception)
