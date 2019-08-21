@@ -19,6 +19,11 @@ namespace Rejime.Models
         public virtual DbSet<Gender> Gender { get; set; }
         #endregion
 
+
+        #region rezazadeh
+        public virtual DbSet<News> News { get; set; }
+        #endregion
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }
